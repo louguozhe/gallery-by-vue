@@ -14,11 +14,14 @@
 .img-figure {
   position: absolute;
   margin: 0;
-  padding: 20px;
+  padding: 14px;
 
-  background-color: #fff;
+  background: #F4F0EC;
 
   box-sizing: border-box;
+  border: 6px double #483C32;
+//   box-shadow: 0 0 0 50px rgba(125,135,18,0.3) inset; 
+
   cursor: pointer;
   transform-origin: 0 50% 0;
   transform-style: preserve-3d;
@@ -49,7 +52,7 @@
       line-height: 1.25;
       text-align: left;
 
-      background-color: #fff;
+      background-color: #F4F0EC;
 
       box-sizing: border-box;
       transform: rotateY(-180deg);
