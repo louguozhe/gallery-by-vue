@@ -20,7 +20,6 @@
 
   box-sizing: border-box;
   border: 6px double #483C32;
-//   box-shadow: 0 0 0 50px rgba(125,135,18,0.3) inset; 
 
   cursor: pointer;
   transform-origin: 0 50% 0;

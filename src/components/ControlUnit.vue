@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     handleClick() {
-      this.$emit('click-img', this.imgdata.index)
+      this.$emit('click-nav', this.imgdata.index)
     }
   }
 }

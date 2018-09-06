@@ -4,7 +4,7 @@
             <img-figure v-for="(item,index) in imgsArrangeArr" :key="index" :imgdata="item" :imgSize="Constant.imgSize" @click-img="rearrange"/>
         </section>
         <nav class="controller-nav">
-            <control-unit v-for="(item,index) in imgsArrangeArr" :key="index" :imgdata="item" @click-img="rearrange"></control-unit>
+            <control-unit v-for="(item,index) in imgsArrangeArr" :key="index" :imgdata="item" @click-nav="rearrange"></control-unit>
         </nav>
     </section>
 </template>
