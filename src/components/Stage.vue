@@ -1,10 +1,10 @@
 <template>
     <section class="stage" ref="stage">
         <section class="img-sec">
-            <img-figure v-for="(item,index) in imgsArrangeArr" :key="index" :imgdata="item" :imgSize="Constant.imgSize" @center="rearrange"/>
+            <img-figure v-for="(item,index) in imgsArrangeArr" :key="index" :imgdata="item" :imgSize="Constant.imgSize" @clickimg="rearrange"/>
         </section>
         <nav class="controller-nav">
-            <control-unit v-for="(item,index) in imgsArrangeArr" :key="index" :imgdata="item" @center="rearrange"></control-unit>
+            <control-unit v-for="(item,index) in imgsArrangeArr" :key="index" :imgdata="item" @clickimg="rearrange"></control-unit>
         </nav>
     </section>
 </template>
@@ -86,7 +86,7 @@
           },
           imgSize: {
             width: 280,
-            height: 310
+            height: 320
           }
         },
         imgsArrangeArr: imageDatas

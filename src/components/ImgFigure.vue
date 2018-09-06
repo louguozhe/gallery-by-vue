@@ -1,13 +1,11 @@
 <template>
     <div>
-       <figure class="img-figure" :class="imgdata.isInverse? 'is-inverse' : '' " :style="figureStyle"  @click="centerme">
-          <img :src="imgdata.imageURL" :alt="imgdata.filename" v-show="!imgdata.isInverse">
+       <figure class="img-figure" :style="figureStyle"  @click="clickimg">
+          <img :src="imgdata.imageURL" :alt="imgdata.desc" >
           <figcaption class="fig-caption">
-              <h2 class="img-title"  v-show="!imgdata.isInverse">{{imgdata.fileName}}</h2>
-           <div class="img-back" v-show="imgdata.isInverse" @click="handleclick">
-                <p>
-                  {{imgdata.desc}}
-                </p>
+              <h2 class="img-title"  >{{imgdata.fileName}}</h2>
+              <div class="img-back" :class="imgdata.isInverse? 'img-inverse': ''" :style="backStyle"  @click="handleclick">
+                <p>{{imgdata.desc}}</p>
             </div>
           </figcaption>
 
@@ -18,8 +16,6 @@
 <style lang="scss">
   .img-figure{
     position: absolute;
-    // width: 320px;
-    // height: 360px;
     margin: 0;
     padding: 20px;
 
@@ -31,14 +27,11 @@
     transform-style: preserve-3d;
     transition: transform .6s ease-in-out, left .6s ease-in-out, top .6s ease-in-out;
 
-    &.is-inverse {
-      transform: translate(320px) rotateY(180deg);
-    }
     .fig-caption{
       text-align: center;  
       .img-title {
         margin: 10px 0 0 0;
-        line-height: 20px;
+        line-height: 30px;
         color: #a7a0a2;
         font-size: 16px;
         background-color: antiquewhite
@@ -61,8 +54,11 @@
         background-color: #fff;
 
         box-sizing: border-box;
-        transform: rotateY(180deg) translateZ(1px);
+        transform: rotateY(-180deg);// translateZ(1px);
         backface-visibility: hidden;
+        &.img-inverse{
+          backface-visibility: visible;
+        }
 
         p {
           margin: 0;
@@ -80,6 +76,11 @@ export default {
   computed: {
     // imgtop: this.imgdata.filename,
     // imgleft: this.imgdata.pos.left,
+    backStyle() {
+      var styleObj = {}
+      //   styleObj.backface.visibility = 'hidden'
+      return styleObj
+    },
     figureStyle() {
     //   console.log(this.imgdata.pos.left)
       var styleObj = {
@@ -90,6 +91,10 @@ export default {
       }
       if (this.imgdata.rotate !== 0) {
         styleObj.transform = 'rotate(' + this.imgdata.rotate + 'deg)'
+      }
+      if (this.imgdata.isInverse) {
+        console.log('inverse!' + this.imgdata.rotate)
+        styleObj.transform = 'translate(' + styleObj.width + ') rotateY(180deg)'
       }
       if (this.imgdata.isCenter) {
         styleObj.zIndex = 11
@@ -104,8 +109,8 @@ export default {
     debug() {
     //   console.log(this.imgStyle)
     },
-    centerme() {
-      this.$emit('center', this.imgdata.index)
+    clickimg() {
+      this.$emit('clickimg', this.imgdata.index)
     },
     handleclick() {
     }
