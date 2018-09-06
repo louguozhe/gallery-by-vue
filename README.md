@@ -1,4 +1,3 @@
-# gallery-by-vue
 Gallery by Vue
 =====
 
@@ -23,9 +22,9 @@ Then open [`http://localhost:8080/`](http://localhost:8080/) in a browser.
 使用Vue对项目进行了重构，在一些细节上做了一些调整，例如为图片增加了简易相框
 修复了图片反转再Firefox浏览器中的Bug
 
-## 感谢
+## Thanks
 
-感谢慕课网，感谢materliu老师。通过该项目让我学到了很多！
+感谢慕课网，感谢materliu老师。通过该项目让我学到了很多前端开发技术！
 
 ## Browser Support
 
