@@ -11,9 +11,9 @@
 
 <style lang="scss">
   .stage{
-      width: 100%;
-      height: 700px;
-      position: relative;
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
   .img-sec {
     position: relative;
@@ -27,10 +27,10 @@
   }
   .controller-nav {
     position: absolute;
+
     left: 0;
     bottom: 30px;
     z-index: 101;
-
     width: 100%;
 
     text-align: center;

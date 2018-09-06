@@ -1,72 +1,69 @@
 <template>
-    <div>
-       <figure class="img-figure" :style="figureStyle"  @click="clickImg">
-          <img :src="imgdata.imageURL" :alt="imgdata.desc" >
-          <figcaption class="fig-caption">
-              <h2 class="img-title"  >{{imgdata.fileName}}</h2>
-              <div class="img-back" :class="imgdata.isInverse? 'img-inverse': ''" :style="backStyle">
-                <p>{{imgdata.desc}}</p>
-            </div>
-          </figcaption>
-
-       </figure>
-    </div>
+  <figure class="img-figure" :style="figureStyle"  @click="clickImg">
+    <img :src="imgdata.imageURL" :alt="imgdata.desc" >
+      <figcaption class="fig-caption">
+        <h2 class="img-title"  >{{imgdata.fileName}}</h2>
+          <div class="img-back" :class="imgdata.isInverse? 'img-inverse': ''" :style="backStyle">
+             <p>{{imgdata.desc}}</p>
+          </div>
+      </figcaption>
+  </figure>
 </template>
 
 <style lang="scss">
-  .img-figure{
-    position: absolute;
-    margin: 0;
-    padding: 20px;
+.img-figure {
+  position: absolute;
+  margin: 0;
+  padding: 20px;
 
-    background-color: #fff;
+  background-color: #fff;
 
-    box-sizing: border-box;
-    cursor: pointer;
-    transform-origin: 0 50% 0;
-    transform-style: preserve-3d;
-    transition: transform .6s ease-in-out, left .6s ease-in-out, top .6s ease-in-out;
+  box-sizing: border-box;
+  cursor: pointer;
+  transform-origin: 0 50% 0;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out, left 0.6s ease-in-out,
+    top 0.6s ease-in-out;
 
-    .fig-caption{
-      text-align: center;  
-      .img-title {
-        margin: 10px 0 0 0;
-        line-height: 30px;
-        color: #a7a0a2;
-        font-size: 16px;
-        background-color: antiquewhite
-      }
-      .img-back {
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        width: 100%;
-        height: 100%;
-        padding: 50px 40px;
-        overflow: auto;
-
-        color: #a7a0a2;
-        font-size: 22px;
-        line-height: 1.25;
-        text-align: left;
-
-        background-color: #fff;
-
-        box-sizing: border-box;
-        transform: rotateY(-180deg);// translateZ(1px);
-        backface-visibility: hidden;
-        &.img-inverse{
-          backface-visibility: visible;
-        }
-
-        p {
-          margin: 0;
-        }
-      }
-  }
+  .fig-caption {
+    text-align: center;
+    .img-title {
+      margin: 10px 0 0 0;
+      line-height: 30px;
+      color: #a7a0a2;
+      font-size: 16px;
+      background-color: antiquewhite;
     }
+    .img-back {
+      position: absolute;
+      top: 0;
+      left: 0;
 
+      width: 100%;
+      height: 100%;
+      padding: 50px 40px;
+      overflow: auto;
+
+      color: #a7a0a2;
+      font-size: 22px;
+      line-height: 1.25;
+      text-align: left;
+
+      background-color: #fff;
+
+      box-sizing: border-box;
+      transform: rotateY(-180deg);
+      backface-visibility: hidden;
+      &.img-inverse {
+        backface-visibility: visible;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
 </style>
 
 <script>
