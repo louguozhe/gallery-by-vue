@@ -47,7 +47,7 @@
     for (var i = 0, j = imageDatasArr.length; i < j; i++) {
       var singleImageData = imageDatasArr[i]
       singleImageData.index = i
-      singleImageData.imageURL = '/static/images/' + singleImageData.fileName
+      singleImageData.imageURL = './static/images/' + singleImageData.fileName
       singleImageData.pos = {
         left: 0,
         top: 0
