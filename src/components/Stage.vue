@@ -1,10 +1,10 @@
 <template>
     <section class="stage" ref="stage">
         <section class="img-sec">
-            <img-figure v-for="(item,index) in imgsArrangeArr" :key="index" :imgdata="item" :imgSize="Constant.imgSize" @clickimg="rearrange"/>
+            <img-figure v-for="(item,index) in imgsArrangeArr" :key="index" :imgdata="item" :imgSize="Constant.imgSize" @click-img="rearrange"/>
         </section>
         <nav class="controller-nav">
-            <control-unit v-for="(item,index) in imgsArrangeArr" :key="index" :imgdata="item" @clickimg="rearrange"></control-unit>
+            <control-unit v-for="(item,index) in imgsArrangeArr" :key="index" :imgdata="item" @click-img="rearrange"></control-unit>
         </nav>
     </section>
 </template>
@@ -42,7 +42,6 @@
   import ControlUnit from '@/components/ControlUnit'
   // 获取图片相关的数据
   var imageDatas = require('../data/imageDatas.json')
-
   // 利用自执行函数， 将图片名信息转成图片URL路径信息
   imageDatas = (function genImageURL(imageDatasArr) {
     for (var i = 0, j = imageDatasArr.length; i < j; i++) {
@@ -53,14 +52,12 @@
         left: 0,
         top: 0
       }
-      singleImageData.rotate = 0
-      singleImageData.isInverse = false
       singleImageData.isCenter = false
+      singleImageData.isInverse = false
+      singleImageData.rotate = 0
     }
     return imageDatasArr
   })(imageDatas)
-
-  // console.log(imageDatas)
 
   export default {
     name: 'Stage',
@@ -71,7 +68,7 @@
     data() {
       return {
         Constant: {
-          centerPos: {
+          centerPos: { // 图片居中位置
             left: 0,
             right: 0
           },
@@ -80,11 +77,7 @@
             rightSecX: [0, 0],
             y: [0, 0]
           },
-          vPosRange: { // 垂直方向的取值范围
-            x: [0, 0],
-            topY: [0, 0]
-          },
-          imgSize: {
+          imgSize: { // 图片区域大小
             width: 280,
             height: 320
           }
@@ -103,7 +96,6 @@
         var stageH = stageDOM.scrollHeight
         var halfStageW = Math.floor(stageW / 2)
         var halfStageH = Math.floor(stageH / 2)
-        // var imgFigureDOM = this.$refs.imgFigure0[0]
         var halfImgW = Math.floor(this.Constant.imgSize.width / 2)
         var halfImgH = Math.floor(this.Constant.imgSize.height / 2)
         // 计算中心图片的位置点
@@ -119,13 +111,6 @@
         this.Constant.hPosRange.rightSecX[1] = stageW - halfImgW
         this.Constant.hPosRange.y[0] = -halfImgH
         this.Constant.hPosRange.y[1] = stageH - halfImgH
-
-        // 计算上侧区域图片排布位置的取值范围
-        this.Constant.vPosRange.topY[0] = -halfImgH
-        this.Constant.vPosRange.topY[1] = halfStageH - halfImgH * 3
-        this.Constant.vPosRange.x[0] = halfStageW - this.Constant.imgSize.width
-        this.Constant.vPosRange.x[1] = halfStageW
-        // console.log(this.Constant)
       },
       /*
        * 获取区间内的一个随机值
@@ -141,45 +126,40 @@
         return ((Math.random() > 0.5 ? '' : '-') + Math.floor(Math.random() * 30))
       },
       inverse(index) {
-        // console.log('翻转:' + index + this.imgsArrangeArr[index].isInverse)
         this.imgsArrangeArr[index].isInverse = !this.imgsArrangeArr[index].isInverse
       },
       rearrange(centindex) {
+        // 界面初始化，随机选取一张照片居中
         if (centindex < 0 || centindex >= this.imgsArrangeArr.length) {
           centindex = Math.floor(Math.random() * this.imgsArrangeArr.length)
         }
-        // console.log(centindex)
+        // 如果点击的是剧中的图片，则直接反转
         if (this.imgsArrangeArr[centindex].isCenter) {
           this.inverse(centindex)
           return
         }
+        // 遍历所有图片，将制定的图片居中，其他图片随机分布
         this.imgsArrangeArr.forEach(function name(value, index) {
-          if (centindex === index) {
+          if (centindex === index) { // 制定的图片居中
             value.pos.top = this.Constant.centerPos.top
             value.pos.left = this.Constant.centerPos.left
             value.isCenter = true
+            value.isInverse = false
             value.rotate = 0
-            // this.imgsArrangeArr[index] = {
-            //   pos: this.Constant.centerPos,
-            //   rotate: 0,
-            //   isCenter: true
-            // }
-          } else {
+          } else { // 其他图片随机分布
             var hPosRangeLORX = null
-
-            // 前半部分布局左边， 右半部分布局右边
-            if (index < this.imgsArrangeArr.length / 2) {
+            if (index < this.imgsArrangeArr.length / 2) { // 前半部分居左
               hPosRangeLORX = this.Constant.hPosRange.leftSecX
-            } else {
+            } else { // 后半部分居右
               hPosRangeLORX = this.Constant.hPosRange.rightSecX
             }
             value.pos.top = this.getRangeRandom(this.Constant.hPosRange.y[0], this.Constant.hPosRange.y[1])
             value.pos.left = this.getRangeRandom(hPosRangeLORX[0], hPosRangeLORX[1])
             value.isCenter = false
+            value.isInverse = false
             value.rotate = this.get30DegRandom()
           }
         }.bind(this))
-        // console.log(this.imgsArrangeArr)
       }
     }
 }

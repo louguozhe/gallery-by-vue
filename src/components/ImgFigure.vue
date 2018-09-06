@@ -1,10 +1,10 @@
 <template>
     <div>
-       <figure class="img-figure" :style="figureStyle"  @click="clickimg">
+       <figure class="img-figure" :style="figureStyle"  @click="clickImg">
           <img :src="imgdata.imageURL" :alt="imgdata.desc" >
           <figcaption class="fig-caption">
               <h2 class="img-title"  >{{imgdata.fileName}}</h2>
-              <div class="img-back" :class="imgdata.isInverse? 'img-inverse': ''" :style="backStyle"  @click="handleclick">
+              <div class="img-back" :class="imgdata.isInverse? 'img-inverse': ''" :style="backStyle">
                 <p>{{imgdata.desc}}</p>
             </div>
           </figcaption>
@@ -93,7 +93,6 @@ export default {
         styleObj.transform = 'rotate(' + this.imgdata.rotate + 'deg)'
       }
       if (this.imgdata.isInverse) {
-        console.log('inverse!' + this.imgdata.rotate)
         styleObj.transform = 'translate(' + styleObj.width + ') rotateY(180deg)'
       }
       if (this.imgdata.isCenter) {
@@ -102,17 +101,10 @@ export default {
       return styleObj
     }
   },
-  mounted() {
-    this.debug()
-  },
   methods: {
-    debug() {
-    //   console.log(this.imgStyle)
-    },
-    clickimg() {
-      this.$emit('clickimg', this.imgdata.index)
-    },
-    handleclick() {
+    clickImg() {
+      console.log('click-img')
+      this.$emit('click-img', this.imgdata.index)
     }
   }
 }
