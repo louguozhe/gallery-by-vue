@@ -1,7 +1,7 @@
 <template>
     <section class="stage" ref="stage">
         <section class="img-sec">
-            <img-figure v-for="(item,index) in imgsArrangeArr" :key="index" :imgdata="item" @center="rearrange"/>
+            <img-figure v-for="(item,index) in imgsArrangeArr" :key="index" :imgdata="item" :imgSize="Constant.imgSize" @center="rearrange"/>
         </section>
         <nav class="controller-nav">
             <control-unit v-for="(item,index) in imgsArrangeArr" :key="index" :imgdata="item" @center="rearrange"></control-unit>
@@ -83,6 +83,10 @@
           vPosRange: { // 垂直方向的取值范围
             x: [0, 0],
             topY: [0, 0]
+          },
+          imgSize: {
+            width: 280,
+            height: 310
           }
         },
         imgsArrangeArr: imageDatas
@@ -100,10 +104,8 @@
         var halfStageW = Math.floor(stageW / 2)
         var halfStageH = Math.floor(stageH / 2)
         // var imgFigureDOM = this.$refs.imgFigure0[0]
-        var imgW = 340 // imgFigureDOM.scrollWidth
-        var imgH = 320 // imgFigureDOM.scrollHeight
-        var halfImgW = Math.floor(imgW / 2)
-        var halfImgH = Math.floor(imgH / 2)
+        var halfImgW = Math.floor(this.Constant.imgSize.width / 2)
+        var halfImgH = Math.floor(this.Constant.imgSize.height / 2)
         // 计算中心图片的位置点
         this.Constant.centerPos = {
           left: halfStageW - halfImgW,
@@ -121,7 +123,7 @@
         // 计算上侧区域图片排布位置的取值范围
         this.Constant.vPosRange.topY[0] = -halfImgH
         this.Constant.vPosRange.topY[1] = halfStageH - halfImgH * 3
-        this.Constant.vPosRange.x[0] = halfStageW - imgW
+        this.Constant.vPosRange.x[0] = halfStageW - this.Constant.imgSize.width
         this.Constant.vPosRange.x[1] = halfStageW
         // console.log(this.Constant)
       },

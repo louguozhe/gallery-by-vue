@@ -18,10 +18,10 @@
 <style lang="scss">
   .img-figure{
     position: absolute;
-    width: 320px;
-    height: 360px;
+    // width: 320px;
+    // height: 360px;
     margin: 0;
-    padding: 40px;
+    padding: 20px;
 
     background-color: #fff;
 
@@ -37,9 +37,11 @@
     .fig-caption{
       text-align: center;  
       .img-title {
-        margin: 20px 0 0 0;
+        margin: 10px 0 0 0;
+        line-height: 20px;
         color: #a7a0a2;
         font-size: 16px;
+        background-color: antiquewhite
       }
       .img-back {
         position: absolute;
@@ -74,7 +76,7 @@
 <script>
 export default {
   name: 'ImgFigure',
-  props: ['imgdata'],
+  props: ['imgdata', 'imgSize'],
   computed: {
     // imgtop: this.imgdata.filename,
     // imgleft: this.imgdata.pos.left,
@@ -82,7 +84,9 @@ export default {
     //   console.log(this.imgdata.pos.left)
       var styleObj = {
         top: this.imgdata.pos.top + 'px',
-        left: this.imgdata.pos.left + 'px'
+        left: this.imgdata.pos.left + 'px',
+        width: this.imgSize.width + 'px',
+        height: this.imgSize.height + 'px'
       }
       if (this.imgdata.rotate !== 0) {
         styleObj.transform = 'rotate(' + this.imgdata.rotate + 'deg)'
